@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Girija</title>
+
+    <link rel="stylesheet" href="Styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="JS/index.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode sunny">
+    <div class="app-container">
+        <header>
+            <h1><i class="fas fa-cloud-moon"></i> Weather App</h1>
+        </header>
+        
+        <main>
+            <section class="search-section">
+                <form class="search-form" action="/submit" method="post">
+                    <div class="input-group">
+                        <input type="text" id="location" name="location" placeholder="Enter city name" required>
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <% if (locals.data) { %>
+                <% //console.log(data); %>
+            <section class="weather-display">
+                <div class="weather-card">
+                    <div class="location-info">
+                        <h2><%= location%>, <%=state%>, <%=country%></h2>
+                        <p class="date"><%=date%></p>
+                    </div>
+                    
+                    <div class="weather-info">
+                        <div class="temperature">
+                            <span class="temp-value"><%=data.main.temp%>°C</span>
+                            <div class="temp-details">
+                                <p>Feels like: <%= data.main.feels_like%>°C</p>
+                                <p>Min: <%= data.main.temp_min%>°C | Max: <%= data.main.temp_max%>°C</p>
+                            </div>
+                        </div>
+                        
+                        <div class="weather-icon">
+                            <img src="https://openweathermap.org/img/wn/<%=data.weather[0].icon%>@2x.png">
+                            <p><%=data.weather[0].main%></p>
+                            <p class="description"><%=data.weather[0].description%></p>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <i class="fas fa-wind"></i>
+                            <div>
+                                <p class="detail-label">Wind</p>
+                                <p class="detail-value"><%=data.wind.speed%> km/h</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-tint"></i>
+                            <div>
+                                <p class="detail-label">Humidity</p>
+                                <p class="detail-value"><%= data.main.humidity%>%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <div>
+                                <p class="detail-label">Pressure</p>
+                                <p class="detail-value"><%= data.main.pressure%> hPa</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-sun"></i>
+                            <div>
+                                <p class="detail-label">Sunrise</p>
+                                <p class="detail-value"><%= new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) %></p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-moon"></i>
+                            <div>
+                                <p class="detail-label">Sunset</p>
+                                <p class="detail-value"><%= new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <% } else { %>
+                <div class="empty-state">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                    <h3>Search Cities to get Started</h3>
+                </div>
+            <% } %>
+        </main>
+        
+        <footer>
+            <p>Girija Ray © 2025 Weather App</p>
+        </footer>
+    </div>
+</body>
+</html>

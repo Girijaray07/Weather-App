@@ -1,7 +1,7 @@
 # Weather App
 
 ## Description
-A Weather App that provides weather details for a specific location.
+The Weather App provides real-time weather updates for any location worldwide. Built with Node.js, Express, and OpenWeatherMap API, it displays temperature, humidity, wind speed, and conditions. With a clean, responsive design, it ensures easy access to accurate weather data on any device, making it perfect for travel planning or daily forecasts.
 
 ## Installation
 1. Clone the repository:

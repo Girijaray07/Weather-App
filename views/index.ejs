@@ -86,7 +86,7 @@
                             <i class="fas fa-sun"></i>
                             <div>
                                 <p class="detail-label">Sunrise</p>
-                                <p class="detail-value"><%= new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) %></p>
+                                <p class="detail-value"><%= sunrise %></p>
                             </div>
                         </div>
                         
@@ -94,7 +94,7 @@
                             <i class="fas fa-moon"></i>
                             <div>
                                 <p class="detail-label">Sunset</p>
-                                <p class="detail-value"><%= new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) %></p>
+                                <p class="detail-value"><%= sunset %></p>
                             </div>
                         </div>
                     </div>

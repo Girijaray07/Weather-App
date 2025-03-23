@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/submit", async (req, res) => {
-    const location = req.body.location;
+    var location = req.body.location;
 
     if (!(location)) {
         res.redirect("/");
@@ -30,6 +30,7 @@ app.post("/submit", async (req, res) => {
         const data = response.data;
         const lat = data[0].lat;
         const lon = data[0].lon;
+        location = data[0].name;
         const state = data[0].state;
         const country = data[0].country;
 
@@ -38,26 +39,37 @@ app.post("/submit", async (req, res) => {
         const weather_response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_APIKEY}&units=metric`);
 
         const weather_data = weather_response.data;
-        console.log(weather_data);
+        // console.log(weather_data);
 
         const timestamp = weather_data.dt;
         const timezoneOffset = weather_data.timezone;
-
         const localTime = new Date((timestamp + timezoneOffset) * 1000);
-
-        // Format the date
         const formattedDate = localTime.toLocaleDateString("en-US", {
             weekday: "long",
-            month: "long",
-            day: "numeric"
+            day: "numeric",
+            month: "long"
         });
+
+        const sunRise = new Date(weather_data.sys.sunrise * 1000).toLocaleTimeString('en-US', {
+            hour: '2-digit', 
+            minute:'2-digit'
+        });
+
+        const sunSet = new Date(weather_data.sys.sunset * 1000).toLocaleTimeString('en-US', {
+            hour: '2-digit', 
+            minute:'2-digit'
+        });
+
+        console.log(sunRise, sunSet);
 
         res.render("index.ejs", {
             data : weather_data,
             location: location,
             state: state,
             country: country,
-            date : formattedDate
+            date : formattedDate,
+            sunrise : sunRise,
+            sunset : sunSet
         });
     } catch (err) {
         console.log(err);

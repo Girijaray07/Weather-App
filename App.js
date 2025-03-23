@@ -6,10 +6,10 @@ import ejs from "ejs";
 dotenv.config();
 
 const app = express();
-const port  = 3000;
+const port = 3000;
 const OPENWEATHER_APIKEY = process.env.OPENWEATHER_APIKEY_MAIN;
 
-app.use(express.urlencoded( { extended: true } ));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
@@ -23,7 +23,7 @@ app.post("/submit", async (req, res) => {
     if (!(location)) {
         res.redirect("/");
     }
-    
+
     try {
         const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${OPENWEATHER_APIKEY}`);
 
@@ -50,26 +50,33 @@ app.post("/submit", async (req, res) => {
             month: "long"
         });
 
-        const sunRise = new Date(weather_data.sys.sunrise * 1000).toLocaleTimeString('en-US', {
-            hour: '2-digit', 
-            minute:'2-digit'
+        const sunriseLocal = new Date(weather_data.sys.sunrise * 1000);
+        const sunsetLocal = new Date(weather_data.sys.sunset * 1000);
+
+        const sunRise = sunriseLocal.toLocaleTimeString("en-US", {
+            timeZone: "Asia/Kolkata",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
         });
 
-        const sunSet = new Date(weather_data.sys.sunset * 1000).toLocaleTimeString('en-US', {
-            hour: '2-digit', 
-            minute:'2-digit'
+        const sunSet = sunsetLocal.toLocaleTimeString("en-US", {
+            timeZone: "Asia/Kolkata",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
         });
 
         console.log(sunRise, sunSet);
 
         res.render("index.ejs", {
-            data : weather_data,
+            data: weather_data,
             location: location,
             state: state,
             country: country,
-            date : formattedDate,
-            sunrise : sunRise,
-            sunset : sunSet
+            date: formattedDate,
+            sunrise: sunRise,
+            sunset: sunSet
         });
     } catch (err) {
         console.log(err);

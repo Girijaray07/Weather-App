@@ -100,7 +100,7 @@ app.post("/getweather", async (req, res) => {
         return res.status(400).json({ error: "Latitude and Longitude are required." });
     }
 
-    console.log(lat, lon);
+    // console.log(lat, lon);
     try {
         getWeatherData(lat, lon);
 

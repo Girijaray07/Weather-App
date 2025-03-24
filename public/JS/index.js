@@ -1,5 +1,4 @@
 const weatherCondition = weatherData.weather[0].main.toLowerCase(); 
-
 const body = document.body;
 
 function updateBackground(condition) {
@@ -16,9 +15,10 @@ function updateBackground(condition) {
     }
 }
 
-function getWeather() {
+function getWeather(button) {
+    button.classList.add("loading");
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.watchPosition((position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
     
@@ -37,6 +37,9 @@ function getWeather() {
                 })
                 .catch((error) => {
                     console.error("Error getting weather:", error.message);
+                })
+                .finally(() => {
+                    button.classList.remove("loading");
                 });
             },
             (error) => {

@@ -15,3 +15,35 @@ function updateBackground(condition) {
         body.className = "clear";
     }
 }
+
+function getWeather() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+    
+                fetch("/getweather", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify({lat, lon}),
+                })
+                .then((res) => {
+                    console.log(res.status);
+                    if (res.status === 200) {
+                        window.location.reload();
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error getting weather:", error.message);
+                });
+            },
+            (error) => {
+                console.error("Error getting location:", error.message);
+            }
+        );
+    } else {
+        console.log("Geolocation is not available");
+    }
+}

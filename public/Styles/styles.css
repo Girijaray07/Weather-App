@@ -52,12 +52,13 @@ body {
     border-radius: 20px;
     overflow: hidden;
     backdrop-filter: blur(10px);
+
+    transition: 0.3s ease;
 }
 
 .dark-mode .app-container {
-    background-color: rgba(30, 30, 30, 0.8);
+    background-color: rgba(22, 22, 22, 0.8);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 header {
@@ -66,9 +67,8 @@ header {
 }
 
 .dark-mode header {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background: transparent;
     color: #e2e8f0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 header h1 {
@@ -122,7 +122,7 @@ main {
 
 .dark-mode .input-group input:focus {
     border-color: #4299e1;
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.094);
 }
 
 .search-btn {
@@ -140,12 +140,16 @@ main {
     transition: background-color 0.3s ease;
 }
 
-.dark-mode .search-btn {
+.search-btn1 {
+    right: 50px;
+}
+
+.dark-mode .search-btn, .dark-mode .search-btn1 {
     background-color: #4299e1;
     color: #e2e8f0;
 }
 
-.dark-mode .search-btn:hover {
+.dark-mode .search-btn:hover, .dark-mode .search-btn1:hover {
     background-color: #3182ce;
 }
 
@@ -161,9 +165,10 @@ main {
 }
 
 .dark-mode .weather-card {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-image: linear-gradient(135deg, var(--darkreader-background-1a1a2e, #151a1c), var(--darkreader-background-16213e, #1a1e20));
+    color: whitesmoke;
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); */
+    /* border: 1px solid rgba(255, 255, 255, 0.05); */
 }
 
 .location-info {
@@ -256,6 +261,7 @@ main {
     gap: 15px;
     border-radius: 12px;
     padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .detail-item {
@@ -264,6 +270,13 @@ main {
     gap: 15px;
     flex: 1;
     min-width: 150px;
+}
+
+.detail-pipe {
+    width: 1px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .detail-item i {
@@ -335,9 +348,8 @@ footer {
 }
 
 .dark-mode footer {
-    background-color: rgba(26, 32, 44, 0.7);
+    background-color: transparent;
     color: #a0aec0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 768px) {

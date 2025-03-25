@@ -12,6 +12,7 @@ const OPENWEATHER_APIKEY = process.env.OPENWEATHER_APIKEY_MAIN;
 const geocoder = NodeGrocoder({ provider: "openstreetmap" });
 
 var weather_data, location, state, country, formattedDate, sunRise, sunSet = "";
+var countUsers = 0;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -55,6 +56,8 @@ async function getWeatherData(lat, lon) {
 };
 
 app.get("/", (req, res) => {
+    countUsers++;
+    console.log("Users: " + countUsers + " - " + new Date().toLocaleTimeString());
     res.render("index.ejs", {
         data: weather_data,
         location: location,

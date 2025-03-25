@@ -110,7 +110,7 @@ app.post("/getweather", async (req, res) => {
 
         location = location_response[0].formattedAddress.split(",")[0].trim();;
         state = location_response[0].state;
-        country = location_response[0].country;
+        country = location_response[0].countryCode;
 
         console.log(lat, lon, location, state, country);
 

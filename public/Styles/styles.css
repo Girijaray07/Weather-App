@@ -51,6 +51,15 @@ body {
                 url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1708&q=80') no-repeat center center/cover;
 }
 
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+a :hover {
+    text-decoration: underline;
+    color: #00629e;
+}
+
 .middle {
     display: flex;
     justify-content: center;
@@ -63,7 +72,7 @@ body {
     overflow: hidden;
     backdrop-filter: blur(10px);
 
-    transition: 0.3s ease;
+    animation: visible 0.6s ease-in-out;
 }
 
 .dark-mode .app-container {
@@ -190,7 +199,7 @@ main {
     flex-direction: column;
     gap: 30px;
 
-    animation: visible 0.6s ease;
+    animation: visible 0.9s ease;
 }
 
 .weather-card {
@@ -390,6 +399,13 @@ footer {
 .dark-mode footer {
     background-color: transparent;
     color: #a0aec0;
+}
+
+.dark-mode .footer-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
 }
 
 @media (max-width: 768px) {

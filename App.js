@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 const port = 3000;
 const OPENWEATHER_APIKEY = process.env.OPENWEATHER_APIKEY_MAIN;
-const geocoder = NodeGrocoder({ provider: "openstreetmap" });
+const geocoder = NodeGeocoder({ provider: "openstreetmap" });
 
 var weather_data, location, state, country, formattedDate, sunRise, sunSet = "";
 var countUsers = 0;

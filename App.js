@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import axios from "axios";
 import ejs from "ejs";
-import NodeGrocoder from "node-geocoder";
+import NodeGeocoder from "node-geocoder";
 
 dotenv.config();
 
@@ -56,8 +56,8 @@ async function getWeatherData(lat, lon) {
 };
 
 app.get("/", (req, res) => {
-    countUsers++;
-    console.log("Users: " + countUsers + " - " + new Date().toLocaleTimeString());
+    // countUsers++;
+    // console.log("Users: " + countUsers + " - " + new Date().toLocaleTimeString());
     res.render("index.ejs", {
         data: weather_data,
         location: location,
@@ -71,6 +71,7 @@ app.get("/", (req, res) => {
 
 app.post("/submit", async (req, res) => {
     location = req.body.location;
+    console.log(location);
 
     if (!(location)) {
         res.redirect("/");
